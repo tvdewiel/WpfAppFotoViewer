@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -19,24 +20,30 @@ namespace WpfAppFotoViewer
     public partial class MainWindow : Window
     {
         private OpenFolderDialog openFolderDialog;
+        //private List<string> images = new();
+        private ObservableCollection<string> imageCollection;
         public MainWindow()
         {
             InitializeComponent();
             openFolderDialog = new OpenFolderDialog();
-            openFolderDialog.DefaultDirectory = "C:\\data\\fotos";
-            openFolderDialog.InitialDirectory = "C:\\data\\fotos";
+            openFolderDialog.DefaultDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data";
+            openFolderDialog.InitialDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data";
+            TextBoxPath.Text = openFolderDialog.InitialDirectory;
+            imageCollection=new ObservableCollection<string>(Directory.GetFiles(openFolderDialog.InitialDirectory, "*.jpg").ToList());
+            ListBoxPictures.ItemsSource = imageCollection;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonFolder_Click(object sender, RoutedEventArgs e)
         {
             openFolderDialog.ShowDialog();
             TextBoxPath.Text = openFolderDialog.FolderName;
-            ListBoxPictures.ItemsSource = Directory.GetFiles(openFolderDialog.FolderName);
+            imageCollection= new ObservableCollection<string>(Directory.GetFiles(openFolderDialog.FolderName,"*.jpg").ToList());
         }
 
         private void ListBoxPictures_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            WindowImage w = new WindowImage(imageCollection,(int)ListBoxPictures.SelectedIndex);
+            w.ShowDialog();
         }
     }
 }

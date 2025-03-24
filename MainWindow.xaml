@@ -16,7 +16,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" Margin="5" Name="TextBoxPath"/>
-        <Button Grid.Column="1" Grid.Row="0" Margin="5" Content="Load Pictures" Click="Button_Click"/>
+        <Button Grid.Column="1" Grid.Row="0" Margin="5" Content="Load Pictures" Click="ButtonFolder_Click"/>
         <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="ListBoxPictures" MouseDoubleClick="ListBoxPictures_MouseDoubleClick" />
     </Grid>
 </Window>
