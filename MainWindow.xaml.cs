@@ -26,8 +26,8 @@ namespace WpfAppFotoViewer
         {
             InitializeComponent();
             openFolderDialog = new OpenFolderDialog();
-            openFolderDialog.DefaultDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data";
-            openFolderDialog.InitialDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data";
+            openFolderDialog.DefaultDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data\\test";
+            openFolderDialog.InitialDirectory = "C:\\VisualStudioProjects\\PG_cursus\\data\\test";
             TextBoxPath.Text = openFolderDialog.InitialDirectory;
             imageCollection=new ObservableCollection<string>(Directory.GetFiles(openFolderDialog.InitialDirectory, "*.jpg").ToList());
             ListBoxPictures.ItemsSource = imageCollection;
@@ -38,6 +38,7 @@ namespace WpfAppFotoViewer
             openFolderDialog.ShowDialog();
             TextBoxPath.Text = openFolderDialog.FolderName;
             imageCollection= new ObservableCollection<string>(Directory.GetFiles(openFolderDialog.FolderName,"*.jpg").ToList());
+            ListBoxPictures.ItemsSource = imageCollection;
         }
 
         private void ListBoxPictures_MouseDoubleClick(object sender, MouseButtonEventArgs e)
